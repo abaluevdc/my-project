@@ -1,0 +1,25 @@
+<div [formGroup]="customControlGroup">
+  <label for="month">Month: </label>
+  <input
+    id="month"
+    class="month"
+    placeholder="month"
+    formControlName="month">
+  <br>
+  <label for="year">Year: </label>
+  <input
+    id="year"
+    class="year"
+    placeholder="year"
+    formControlName="year">
+</div>
+
+<pre>
+  {{ this.customControlGroup.value | json }}
+</pre>
+
+
+
+
+
+

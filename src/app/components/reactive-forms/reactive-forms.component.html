@@ -1,1 +1,42 @@
-<p>reactive-forms works!</p>
+<h2>reactive-forms works!</h2>
+
+<pre>
+  {{ this.myForm.value | json }}
+</pre>
+
+<br>
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+  <div class="add-fields">
+    <button class="btn" type="button" (click)="addFields()">Add fields</button>
+  </div>
+
+  <div class="fields" formArrayName="fields" *ngFor="let field of fields.controls; let index = index">
+    <div class="fields-wrapper" [formGroupName]="index">
+      <fieldset>
+        <legend>{{ index }} mainFields</legend>
+        <label for="name">name: </label>
+        <input type="text" id="name" formControlName="name" placeholder="name" />
+        <span>name : {{ field.get("name")?.value | lowercase }}</span>
+        <br>
+        <label for="price">price: </label>
+        <input type="text"  id="price" (input)="inputChange($event, field.get('price'))" formControlName="price" placeholder="price" />
+
+        <span>price : {{ field.get("price")?.value | numSpaces }}</span>
+
+        <fieldset class="customControlGroup">
+          <legend>customControlGroup</legend>
+          <app-custom-control formControlName="monthQuantity"></app-custom-control>
+        </fieldset>
+      </fieldset>
+      <button class="btn" (click)="removeFields(index)">Remove fields</button>
+    </div>
+  </div>
+
+
+    <button class="btn" type="submit">Submit in console</button>
+
+
+</form>
+
